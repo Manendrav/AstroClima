@@ -87,12 +87,12 @@ export default function Home() {
                                 </div>
 
                                 <div className='info'>
-                                    <TodayForcast data={weatherData} forecast={forecastData} icon={weatherIcon}/>
+                                    <TodayForcast data={weatherData} error={errorMessage} forecast={forecastData} icon={weatherIcon}/>
                                 </div>
                             </div>
 
                             <div className='weekwether'>
-                                <Weeks />
+                                <Weeks forecast={forecastData} icon={weatherIcon}/>
                             </div>
                         </div>
                     </div>

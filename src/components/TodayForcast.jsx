@@ -7,7 +7,7 @@ export default function TodayForcast({ forecast, error, icon, data }) {
     const [list, setList] = useState();
     useEffect(() => {
         if (forecast) {
-            const limitedList = forecast.list.slice(0, 10);
+            const limitedList = forecast.list.slice(0, 14);
             setList(limitedList);
         }
     }, [forecast]); // Run this effect whenever 'forecast' changes
@@ -16,9 +16,13 @@ export default function TodayForcast({ forecast, error, icon, data }) {
     //console.log(data);
 
     function formatetime(time) {                             // wrong way to use it because it get called every time insted difine it on inside map
-        const date = new Date(time * 1000);             // Multiply by 1000 to convert seconds to milliseconds
-        const formattedTime = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric' });
-        return formattedTime;
+        const timePart = time.split(' ')[1]; 
+        const [hours, minutes] = timePart.split(':');       // Split hours and minutes
+        const parsedHours = parseInt(hours, 10);
+        const ampm = parsedHours >= 12 ? 'PM' : 'AM';
+        return `${hours}:${minutes} ${ampm}`;
+       // console.log(time);
+
     }
 
     return (
@@ -30,16 +34,24 @@ export default function TodayForcast({ forecast, error, icon, data }) {
                         list ?
                             list.map((day, key) => (
                                 <div key={key} className={`${key < list.length - 1 ? 'border-r-2 pr-5 border-gray-700' : ''}`}>
-                                    <h3 className='text-sm text-gray-400 font-medium mb-3'>{formatetime(day.dt)}</h3>
-                                    <div className='text-center w-[6vw] h-[10vh] flex items-center '>
-                                        <img src={icon[day.weather[0].icon]} alt="night" />
+                                    <h3 className='text-sm text-gray-400 font-medium mb-3'>{formatetime(day.dt_txt)}</h3>
+                                    <div className='text-center w-[6vw] h-[15vh] flex items-center '>
+                                        <img src={icon[day.weather[0].icon]} alt="night" className='h-[10vh]' />
                                     </div>
                                     <h3 className='font-semibold text-sm mb-2 text-gray-300'>{day.weather[0].main}</h3>
 
                                     <h3 className="text-lg font-semibold">{parseInt(day.main.temp)}°</h3>
                                 </div>
                             ))
-                            : " "
+                            : <div className='border-r-2 pr-5 border-gray-700'>
+                                <h3 className='text-sm text-gray-400 font-medium mb-3'></h3>
+                                <div className='text-center w-[6vw] h-[15vh] flex items-center '>
+                                    <img src="" alt="night" className='h-[10vh]' />
+                                </div>
+                                <h3 className='font-semibold text-sm mb-2 text-gray-300'></h3>
+
+                                <h3 className="text-lg font-semibold">°</h3>
+                            </div>
                     }
 
 

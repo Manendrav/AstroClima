@@ -10,6 +10,8 @@ export const useWeatherStore = create((set) => ({
 
         const todayForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&excluded=hour&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`
 
+       // const weekData = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`
+        
         const weatherPromise = fetch(apiUrl)
             .then((response) => {
                 if (!response.ok) {
