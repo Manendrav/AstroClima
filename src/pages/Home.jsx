@@ -4,6 +4,7 @@ import Weather from '../components/Weather';
 import Weeks from '../components/Weeks';
 import TodayForcast from '../components/TodayForcast';
 import { useWeatherStore } from '../store/store';
+import SunMove from '../components/SunMove';
 
 
 export default function Home() {
@@ -92,7 +93,12 @@ export default function Home() {
                             </div>
 
                             <div className='weekwether'>
-                                <Weeks forecast={forecastData} icon={weatherIcon}/>
+                                <div className='sun'>
+                                    <SunMove data={weatherData} error={errorMessage}/>
+                                </div>
+                                <div>
+                                    <Weeks forecast={forecastData} icon={weatherIcon}/>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -29,7 +29,7 @@ export default function Weather({ data, error, icon }) {
         </div> */}
 
         <div className='svg text-center'>
-          <img src={data ? icon[data.weather[0].icon] : ""} alt="weather-icon" className='h-[20vh]' />
+          <img src={data ? icon[data.weather[0].icon] : ""} alt="weather-icon" className='h-[20vh] p-3' />
           <h3 className='font-semibold text-sm'>{data ? data.weather[0].description : "..."}</h3>
         </div>
       </div>

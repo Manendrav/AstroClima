@@ -11,10 +11,10 @@ export default function Weeks({ forecast, error, icon }) {
     }
   }, [forecast]);
 
-  console.log(list);
+ // console.log(list);
 
   function formateday(day){
-    console.log(day);
+   // console.log(day);
     const [datestr, timestr] = day.split(' ');
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const date = new Date(datestr);
