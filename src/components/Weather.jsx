@@ -16,18 +16,6 @@ export default function Weather({ data, error, icon }) {
           </div>
         </div>
 
-        {/* <div className='flex items-end gap-5'>
-          <div className='p-5 text-center'>
-            <h3 className='text-xl font-medium mb-4'>Min</h3>
-            <h3 className="text-2xl font-semibold">{data ? parseInt(data.main.temp_min < 50 ? data.main.temp_min : data.main.temp_min - 273.15) : "-.-"}°</h3>
-          </div>
-
-          <div className='p-5 text-center'>
-            <h3 className='text-xl font-medium mb-4'>Max</h3>
-            <h3 className="text-2xl font-semibold">{data ? parseInt(data.main.temp_max < 50 ? data.main.temp_max : data.main.temp_max - 273.15) : "-.-"}°</h3>
-          </div>
-        </div> */}
-
         <div className='svg text-center'>
           <img src={data ? icon[data.weather[0].icon] : ""} alt="weather-icon" className='h-[20vh] p-3' />
           <h3 className='font-semibold text-sm'>{data ? data.weather[0].description : "..."}</h3>

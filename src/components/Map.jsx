@@ -1,8 +1,15 @@
 import React from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import marker from '../../public/loc.svg';
+import { Icon } from 'leaflet'
 
 const Map = ({ latitude, longitude }) => {
+
+    const myIcon = new Icon({
+        iconUrl: marker,
+        iconSize: [42,42]
+       })
 
     return (
         <MapContainer
@@ -15,7 +22,7 @@ const Map = ({ latitude, longitude }) => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution=''
             />
-            <Marker position={[latitude, longitude]}></Marker>
+            <Marker position={[latitude, longitude]} icon={myIcon}></Marker>
         </MapContainer>
     );
 };
