@@ -12,17 +12,26 @@ export default function TodayForcast({ forecast, error, icon, data }) {
         }
     }, [forecast]); // Run this effect whenever 'forecast' changes
 
-    // console.log(list);
+     console.log(list);
     //console.log(data);
 
-    function formatetime(time) {                             // wrong way to use it because it get called every time insted difine it on inside map
-        const timePart = time.split(' ')[1]; 
-        const [hours, minutes] = timePart.split(':');       // Split hours and minutes
-        const parsedHours = parseInt(hours, 10);
-        const ampm = parsedHours >= 12 ? 'PM' : 'AM';
-        return `${hours}:${minutes} ${ampm}`;
-       // console.log(time);
+    // function formatetime(time) {                             // wrong way to use it because it get called every time insted difine it on inside map
+    //     // const timePart = time.split(' ')[1]; 
+    //     // const [hours, minutes] = timePart.split(':');       // Split hours and minutes
+    //     // const parsedHours = parseInt(hours, 10);
+    //     // const ampm = parsedHours >= 12 ? 'PM' : 'AM';
+    //     // return `${hours}:${minutes} ${ampm}`;
+    //     // console.log(time);
 
+    // }
+
+
+    function formatTime(time) {
+        const date = new Date(time * 1000);
+        const formattedTime = date.toLocaleTimeString(undefined, { hour: 'numeric', minute: 'numeric', hour12: false });
+        const [hours, minutes] = formattedTime.split(':')
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        return `${formattedTime} ${ampm}` ;
     }
 
     return (
@@ -34,7 +43,7 @@ export default function TodayForcast({ forecast, error, icon, data }) {
                         list ?
                             list.map((day, key) => (
                                 <div key={key} className={`${key < list.length - 1 ? 'border-r-2 pr-5 border-gray-700' : ''}`}>
-                                    <h3 className='text-sm text-gray-400 font-medium mb-3'>{formatetime(day.dt_txt)}</h3>
+                                    <h3 className='text-sm text-gray-400 font-medium mb-3'>{formatTime(day.dt)}</h3>
                                     <div className='text-center w-[6vw] h-[15vh] flex items-center '>
                                         <img src={icon[day.weather[0].icon]} alt="night" className='h-[10vh]' />
                                     </div>

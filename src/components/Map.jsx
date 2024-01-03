@@ -13,13 +13,9 @@ const Map = ({ latitude, longitude }) => {
         >
             <TileLayer
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; OpenStreetMap contributors'
+                attribution=''
             />
-            <Marker position={[latitude, longitude]}>
-                <Popup>
-                    A marker at ({latitude}, {longitude})
-                </Popup>
-            </Marker>
+            <Marker position={[latitude, longitude]}></Marker>
         </MapContainer>
     );
 };

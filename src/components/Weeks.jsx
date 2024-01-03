@@ -11,7 +11,7 @@ export default function Weeks({ forecast, error, icon }) {
     }
   }, [forecast]);
 
- // console.log(list);
+ console.log(list);
 
   function formateday(day){
    // console.log(day);

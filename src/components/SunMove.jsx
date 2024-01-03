@@ -60,10 +60,10 @@ export default function SunMove({ data, error }) {
             <div className='bg-slate-900 rounded-lg p-3 w-[25vw]'>
                 <div className='icon flex justify-between px-3'>
                     <div className=''>
-                        <img src="./air/sunrise.svg" alt="sunrise" className='h-[5vh]' />
+                        <img src="./air/sunrise.svg" alt="sunrise" className='h-[4vh]' />
                     </div>
                     <div>
-                        <img src="./air/sunset.svg" alt="sunset" className='h-[5vh]' />
+                        <img src="./air/sunset.svg" alt="sunset" className='h-[4vh]' />
                     </div>
                 </div>
 
