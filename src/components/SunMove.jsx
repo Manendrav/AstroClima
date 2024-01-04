@@ -12,27 +12,42 @@ export default function SunMove({ data, error }) {
         return `${hours}:${minutes}`;
     }
 
-    const [currentTime, setCurrentTime] = useState(0);
-
-    function getCurrenttime() {
-        const currentDate = new Date();
-
-        // Get hours, minutes, and seconds
-        const hours = currentDate.getHours();
-        const minutes = currentDate.getMinutes();
-
-        const formattedTime = `${hours}:${minutes}`;
-
-        setCurrentTime(formattedTime);
-    }
-
-    //console.log(parseInt(currentTime));
+    let currentTime = data ? timeEval(data.dt) : "1";
+    let sunriseTime = data ? timeEval(data.sys.sunrise) : "1";
+    let sunsetTime = data ? timeEval(data.sys.sunrset) : "1";
 
     useEffect(() => {
-        // Check if data is present
-        getCurrenttime();
+        if (data) {
+            const calculatePosition = () => {
+                const sunrise = new Date(data.sys.sunrise * 1000).getTime();
+                const sunset = new Date(data.sys.sunset * 1000).getTime();
+                const currentTime = new Date(data.dt * 1000).getTime();
+
+                const totalDaytime = sunset - sunrise;
+                const elapsedTime = currentTime - sunrise;
+
+                const newPosition = (elapsedTime / totalDaytime) * 100;
+                setPosition(newPosition);
+            };
+
+            calculatePosition();
+
+            // Update position every minute
+            const interval = setInterval(calculatePosition, 60000);
+
+            return () => clearInterval(interval);
+        }
     }, [data]);
 
+    const [position, setPosition] = useState(0);
+
+
+    // Assuming sunrise and sunset are in 24-hour format (e.g., "06:30", "17:30")
+
+
+    // Calculate the percentage of the day that has passed
+
+    console.log(position);
 
 
     return (
@@ -47,11 +62,18 @@ export default function SunMove({ data, error }) {
                     </div>
                 </div>
 
-                <div className='movement h-[11vh] overflow-hidden '>
+                <div className='movement h-[13vh] overflow-hidden p-3'>
                     <div className='border-t-2 rounded-full h-[50vh] relative mt-5 border-slate-500 shadow-2xl shadow-slate-100'>
-                        <div className={`absolute w-14 h-14 rounded-full  ${parseInt(currentTime) > 12 ? "top-10 right-16" : parseInt(currentTime) == 12 ? "top-0 left-28" : "top-5 left-10"} transform translate-x-1/2 -translate-y-1/2`}>
-                            <img src="./air/Sun.svg" alt="" srcset="" />
-                        </div>
+                        {
+                            currentTime > sunsetTime ?
+                                <div className={`absolute w-14 h-14 rounded-full top-[-5px]  left-28 transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
+                                    <img src="./air/Moon.svg" alt="" srcset="" />
+                                </div>
+                                :
+                                <div className={`absolute w-14 h-14 rounded-full ${position > 50 ? 'top-8 right-16' : position > 25 ? "top-0 left-28" : 'top-6 left-5'} transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
+                                    <img src="./air/Sun.svg" alt="" srcset="" />
+                                </div>
+                        }
                     </div>
                 </div>
 
@@ -79,3 +101,5 @@ export default function SunMove({ data, error }) {
         </div>
     )
 }
+
+// ${timeEval(data.dt) > 12 ? "top-10 right-16" : timeEval(data.dt)  == 12 ? "top-0 left-28" : "top-5 left-10"}

@@ -8,7 +8,7 @@ const Map = ({ latitude, longitude }) => {
 
     const myIcon = new Icon({
         iconUrl: marker,
-        iconSize: [42,42]
+        iconSize: [32,42]
        })
 
     return (
