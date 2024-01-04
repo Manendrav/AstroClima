@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-export default function Weeks({ forecast, error, icon }) {
+export default function Weeks({ forecast, error, icon, fernhite, celsiusToFahrenheit }) {
 
   //console.log(forecast)
 
@@ -48,7 +48,7 @@ export default function Weeks({ forecast, error, icon }) {
                     </div>
 
                     <div className='temp'>
-                      <div className="text-2xl font-bold mr-2">{parseInt(day.main.temp)}°</div>
+                      <div className="text-2xl font-bold mr-2">{day ? fernhite ? celsiusToFahrenheit(day.main.temp) : parseInt(day.main.temp) : "-.-"}°</div>
                     </div>
                   </div>
                 )

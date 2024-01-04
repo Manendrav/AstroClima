@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
-export default function TodayForcast({ forecast, error, icon, data }) {
+export default function TodayForcast({ forecast, error, icon, data, fernhite, celsiusToFahrenheit }) {
 
-    //console.log(forecast);
 
     const [list, setList] = useState();
     useEffect(() => {
@@ -52,7 +51,7 @@ export default function TodayForcast({ forecast, error, icon, data }) {
                                     </div>
                                     <h3 className='font-semibold text-sm mb-2 text-gray-300'>{day.weather[0].main}</h3>
 
-                                    <h3 className="text-lg font-semibold">{parseInt(day.main.temp)}°</h3>
+                                    <h3 className="text-lg font-semibold">{day ? fernhite ? celsiusToFahrenheit(day.main.temp) : parseInt(day.main.temp) : "-.-"}°</h3>
                                 </div>
                             ))
                             : <div className='border-r-2 pr-5 border-gray-700'>

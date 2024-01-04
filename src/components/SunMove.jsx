@@ -3,7 +3,6 @@ import L from 'leaflet';
 import Map from './Map';
 
 export default function SunMove({ data, error }) {
-    console.log(data);
 
     function timeEval(time) {
         const suntime = new Date(time * 1000);
@@ -40,14 +39,6 @@ export default function SunMove({ data, error }) {
     }, [data]);
 
     const [position, setPosition] = useState(0);
-
-
-    // Assuming sunrise and sunset are in 24-hour format (e.g., "06:30", "17:30")
-
-
-    // Calculate the percentage of the day that has passed
-
-    console.log(position);
 
 
     return (

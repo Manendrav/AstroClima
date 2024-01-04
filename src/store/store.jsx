@@ -6,7 +6,7 @@ export const useWeatherStore = create((set) => ({
     forecastData: null,
 
     fetchWeatherData: (city) => {
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`;
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&lat=44.34&lon=10.99&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`;
 
         const todayForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&excluded=hour&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`
 
