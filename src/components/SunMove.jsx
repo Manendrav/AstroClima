@@ -3,7 +3,7 @@ import L from 'leaflet';
 import Map from './Map';
 
 export default function SunMove({ data, error }) {
-    //console.log(data);
+    console.log(data);
 
     function timeEval(time) {
         const suntime = new Date(time * 1000);
@@ -34,26 +34,6 @@ export default function SunMove({ data, error }) {
     }, [data]);
 
 
-    // Map
-
-    function showMap({ latitude, longitude }) {
-        useEffect(() => {
-            if (latitude && longitude) {
-                // Initialize the map
-                const map = L.map('map').setView([latitude, longitude], 13);
-
-                // Add a tile layer (you can choose different providers)
-                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '© OpenStreetMap contributors',
-                }).addTo(map);
-
-                // Add a marker at the specified location
-                L.marker([latitude, longitude]).addTo(map);
-            }
-        }, [latitude, longitude]);
-
-        return <div id="map" style={{ height: '400px' }}></div>;
-    }
 
     return (
         <div className='p-3'>

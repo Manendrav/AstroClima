@@ -11,7 +11,7 @@ export default function Weeks({ forecast, error, icon }) {
     }
   }, [forecast]);
 
- console.log(list);
+ // console.log(list);
 
   function formateday(day){
    // console.log(day);
@@ -53,7 +53,6 @@ export default function Weeks({ forecast, error, icon }) {
                   </div>
                 )
               })
-
               : " "
           }
         </div>
@@ -63,11 +62,3 @@ export default function Weeks({ forecast, error, icon }) {
 
   )
 }
-
-// api.openweathermap.org/data/2.5/forecast/daily?lat=44.34&lon=10.99&cnt=7&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric
-
-// https://api.openweathermap.org/data/2.5/forecast?q=${city}&excluded=daily&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric
-
-// https://api.openweathermap.org/data/2.5/forecast?lat=57&lon=-2.15&cnt=7&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric
-
-// https://api.openweathermap.org/data/2.5/forecast?q=rewa&cnt=7&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric
