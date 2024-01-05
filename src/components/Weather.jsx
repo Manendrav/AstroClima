@@ -2,11 +2,13 @@ import React, { useState } from 'react'
 import ReactCountryFlag from 'react-country-flag';
 
 export default function Weather({ data, error, icon, fernhite, celsiusToFahrenheit }) {
+  
   //console.log(data)
+
   return (
     <div className='p-3'>
       <div className='flex md:flex-row justify-between bg-slate-900 rounded-lg p-3'>
-        <div className="location flex flex-col justify-between items-center pl-3 m-3">
+        <div className="location flex flex-col justify-between items-center m-3 min-[600px]:pl-5">
           <div className="text-center">
             <h2 className="text-3xl font-semibold mb-1">{data ? data.name : "-.-"}</h2>
             <div className='flex justify-center gap-2'>

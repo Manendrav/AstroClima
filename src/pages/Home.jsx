@@ -10,11 +10,23 @@ import SunMove from '../components/SunMove';
 export default function Home() {
     const { fetchWeatherData, weatherData, errorMessage, forecastData } = useWeatherStore();
 
+    const [isActive, setIsActive] = useState(false);        // For ferenhite btn
+    const [location, setLocation] = useState(null);         // for user Location
+
+    // this code use to fetch data
     const inputRef = useRef();
+    const inputRefMobile = useRef()
 
     const handleInputChange = () => {
-        const newCity = inputRef.current.value;
-        inputRef.current.value = '';
+        let newCity ;
+        if(inputRef.current.value){
+            newCity = inputRef.current.value;
+            inputRef.current.value = '';
+        }else{
+            newCity = inputRefMobile.current.value;
+            inputRefMobile.current.value = '';
+        }
+
         fetchWeatherData(newCity)
     };
 
@@ -24,6 +36,47 @@ export default function Home() {
         }
     };
 
+
+    // this code is for switch to fheranhite 
+    const handleButtonClick = () => {
+        setIsActive(!isActive);
+    };
+
+    function celsiusToFahrenheit(celsius) {
+        const fahrenheit = (celsius * 9 / 5) + 32;
+        return parseInt(fahrenheit);
+    }
+
+    
+    // This code is used to fetch user location 
+    useEffect(() => {
+        if (navigator.geolocation) {
+            // Ask for location permission
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setLocation({ latitude, longitude });
+                },
+                (error) => {
+                    console.error('Error getting location:', error.message);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }, []);
+    
+
+    // This code is used fetch data according the user location
+    useEffect(() => {
+        if (location) {
+            const { latitude, longitude } = location;
+            fetchWeatherData(null, latitude, longitude);
+        }
+    }, [location]);
+
+
+    // These are the icon used in the app
     const weatherIcon = {
         "01d": "./day/clear-sky-1d.svg",
         "02d": "./day/few-cloud-2d.svg",
@@ -45,48 +98,6 @@ export default function Home() {
         "13n": "./night/snow-13n.svg",
         "50n": "./night/mist-50n.svg",
     }
-
-
-    const [isActive, setIsActive] = useState(false);
-
-    const handleButtonClick = () => {
-        setIsActive(!isActive);
-    };
-
-    function celsiusToFahrenheit(celsius) {
-        const fahrenheit = (celsius * 9 / 5) + 32;
-        return parseInt(fahrenheit);
-    }
-
-    // Test
-
-    const [location, setLocation] = useState(null);
-
-    useEffect(() => {
-        if (navigator.geolocation) {
-            // Ask for location permission
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    setLocation({ latitude, longitude });
-                },
-                (error) => {
-                    console.error('Error getting location:', error.message);
-                }
-            );
-        } else {
-            console.error('Geolocation is not supported by this browser.');
-        }
-    }, []);
-
-    useEffect(() => {
-        if (location) {
-            const { latitude, longitude } = location;
-            fetchWeatherData(null, latitude, longitude);
-        }
-
-    }, [location]);
-
 
 
     return (
@@ -134,7 +145,7 @@ export default function Home() {
                                 <CiSearch size="1.5em" className="ml-2" />
                             </div>
                             <input
-                                ref={inputRef}
+                                ref={inputRefMobile}
                                 type="text"
                                 placeholder="Search..."
                                 className="w-full px-4 rounded-md focus:outline-none bg-slate-800 "

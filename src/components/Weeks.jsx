@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react'
 
 export default function Weeks({ forecast, error, icon, fernhite, celsiusToFahrenheit }) {
 
-  //console.log(forecast)
-
   const [list, setList] = useState();
   useEffect(() => {
     if (forecast) {
@@ -14,7 +12,6 @@ export default function Weeks({ forecast, error, icon, fernhite, celsiusToFahren
   // console.log(list);
 
   function formateday(day) {
-    // console.log(day);
     const [datestr, timestr] = day.split(' ');
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const date = new Date(datestr);
@@ -26,12 +23,12 @@ export default function Weeks({ forecast, error, icon, fernhite, celsiusToFahren
   return (
     <div className='p-3'>
       <div className='w-full md:w-[25vw] bg-slate-900 rounded-lg p-5 mb-3'>
-        <h1 className='text-gray-600 font-medium text-xl mb-3'>5 Day's Forecast</h1>
+        <h1 className='text-gray-500 font-medium text-xl mb-3'>5 Day's Forecast</h1>
 
         <div className='px-2 py-3'>
           {list ? (
             list.map((day, index) => {
-              // Render every 8th item
+              // Render every 8th item on the list
               if ((index - 5) % 8 !== 0) {
                 return null;
               }
@@ -44,7 +41,7 @@ export default function Weeks({ forecast, error, icon, fernhite, celsiusToFahren
                     }`}
                 >
                   <div className='p-3'>
-                    <h1 className='text-sm text-gray-500'>{formateday(day.dt_txt)}</h1>
+                    <h1 className='text-sm text-gray-400'>{formateday(day.dt_txt)}</h1>
                   </div>
 
                   <div className='svg flex items-center p-2'>

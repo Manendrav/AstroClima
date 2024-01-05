@@ -4,6 +4,9 @@ import Map from './Map';
 
 export default function SunMove({ data, error }) {
 
+    const [position, setPosition] = useState(0);
+
+    // This code is used to format time come from API
     function timeEval(time) {
         const suntime = new Date(time * 1000);
         const sunmoveement = suntime.toLocaleTimeString();
@@ -13,8 +16,10 @@ export default function SunMove({ data, error }) {
 
     let currentTime = data ? timeEval(data.dt) : "1";
     let sunriseTime = data ? timeEval(data.sys.sunrise) : "1";
-    let sunsetTime = data ? timeEval(data.sys.sunrset) : "1";
+    let sunsetTime = data ? timeEval(data.sys.sunset) : "1";
 
+
+    // This block of code is responsible for sun movement
     useEffect(() => {
         if (data) {
             const calculatePosition = () => {
@@ -38,8 +43,6 @@ export default function SunMove({ data, error }) {
         }
     }, [data]);
 
-    const [position, setPosition] = useState(0);
-
 
     return (
         <div className='p-3 flex flex-col gap-5'>
@@ -55,12 +58,12 @@ export default function SunMove({ data, error }) {
 
                 <div className='movement h-[13vh] overflow-hidden p-3'>
                     <div className='border-t-2 rounded-full h-[50vh] relative mt-5 border-slate-500 shadow-2xl shadow-slate-100'>
-                        {currentTime > sunsetTime ? (
-                            <div className={`absolute w-14 h-14 rounded-full top-[-5px] left-28 transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
+                        {parseInt(currentTime) > parseInt(sunsetTime) ? (
+                            <div className={`absolute w-14 h-14 rounded-full top-[-5px] min-[600px]:left-24 min-[320px]:left-20 transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
                                 <img src="./air/Moon.svg" alt="moon" />
                             </div>
                         ) : (
-                            <div className={`absolute w-14 h-14 rounded-full ${position > 50 ? 'top-8 right-16' : position > 25 ? "top-0 left-28" : 'top-6 left-5'} transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
+                            <div className={`absolute w-14 h-14 rounded-full ${position > 50 ? 'top-8 right-16' : position > 25 ? "top-0 left-28" : 'top-6 left-5'} transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000 `}>
                                 <img src="./air/Sun.svg" alt="sun" />
                             </div>
                         )}
@@ -69,12 +72,12 @@ export default function SunMove({ data, error }) {
 
                 <div className='time flex justify-between text-sm p-3 text-center'>
                     <div className='sunrise'>
-                        <h3 className='text-gray-500'>Sunrise</h3>
-                        <h3 className='font-semibold'>{data ? timeEval(data.sys.sunrise) : "-.-"}</h3>
+                        <h3 className='text-gray-400'>Sunrise</h3>
+                        <h3 className='font-semibold'>{data ? sunriseTime : "-.-"}</h3>
                     </div>
                     <div className='sunset'>
-                        <h3 className='text-gray-500'>Sunset</h3>
-                        <h3 className='font-semibold'>{data ? timeEval(data.sys.sunset) : "-.-"}</h3>
+                        <h3 className='text-gray-400'>Sunset</h3>
+                        <h3 className='font-semibold'>{data ? sunsetTime : "-.-"}</h3>
                     </div>
                 </div>
             </div>
@@ -92,5 +95,3 @@ export default function SunMove({ data, error }) {
 
     )
 }
-
-// ${timeEval(data.dt) > 12 ? "top-10 right-16" : timeEval(data.dt)  == 12 ? "top-0 left-28" : "top-5 left-10"}
