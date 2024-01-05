@@ -12,7 +12,6 @@ export default function Home() {
 
     const inputRef = useRef();
 
-
     const handleInputChange = () => {
         const newCity = inputRef.current.value;
         inputRef.current.value = '';
@@ -45,10 +44,9 @@ export default function Home() {
         "11n": "./night/rainy-thnderstorm-11n.svg",
         "13n": "./night/snow-13n.svg",
         "50n": "./night/mist-50n.svg",
-
     }
 
-    
+
     const [isActive, setIsActive] = useState(false);
 
     const handleButtonClick = () => {
@@ -56,9 +54,43 @@ export default function Home() {
     };
 
     function celsiusToFahrenheit(celsius) {
-        const fahrenheit = (celsius * 9/5) + 32;
+        const fahrenheit = (celsius * 9 / 5) + 32;
         return parseInt(fahrenheit);
     }
+
+    // Test
+
+    const [location, setLocation] = useState(null);
+
+    useEffect(() => {
+        // Check if the Geolocation API is supported by the browser
+        if (navigator.geolocation) {
+            // Ask for location permission
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    // Handle successful location retrieval
+                    const { latitude, longitude } = position.coords;
+                    setLocation({ latitude, longitude });
+                },
+                (error) => {
+                    // Handle error or user denied permission
+                    console.error('Error getting location:', error.message);
+                }
+            );
+        } else {
+            console.error('Geolocation is not supported by this browser.');
+        }
+    }, []);
+
+    useEffect(() => {
+        if (location) {
+            const { latitude, longitude } = location;
+            fetchWeatherData(null, latitude, longitude);
+        }
+        
+    },[location]);
+
+
 
     return (
         <div>
@@ -104,11 +136,11 @@ export default function Home() {
                         <div className='body flex justify-around' >
                             <div className='todaywether w-[45vw]'>
                                 <div className='weather'>
-                                    <Weather data={weatherData} error={errorMessage} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit = {celsiusToFahrenheit}/>
+                                    <Weather data={weatherData} error={errorMessage} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit={celsiusToFahrenheit} />
                                 </div>
 
                                 <div className='info'>
-                                    <TodayForcast data={weatherData} error={errorMessage} forecast={forecastData} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit = {celsiusToFahrenheit} />
+                                    <TodayForcast data={weatherData} error={errorMessage} forecast={forecastData} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit={celsiusToFahrenheit} />
                                 </div>
                             </div>
 
@@ -117,7 +149,7 @@ export default function Home() {
                                     <SunMove data={weatherData} error={errorMessage} />
                                 </div>
                                 <div>
-                                    <Weeks forecast={forecastData} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit = {celsiusToFahrenheit}/>
+                                    <Weeks forecast={forecastData} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit={celsiusToFahrenheit} />
                                 </div>
                             </div>
                         </div>

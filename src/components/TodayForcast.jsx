@@ -56,9 +56,7 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
                             ))
                             : <div className='border-r-2 pr-5 border-gray-700'>
                                 <h3 className='text-sm text-gray-400 font-medium mb-3'></h3>
-                                <div className='text-center w-[6vw] h-[15vh] flex items-center '>
-                                    <img src="" alt="night" className='h-[10vh]' />
-                                </div>
+                                <div className='text-center w-[6vw] h-[15vh] flex items-center '></div>
                                 <h3 className='font-semibold text-sm mb-2 text-gray-300'></h3>
 
                                 <h3 className="text-lg font-semibold">°</h3>
