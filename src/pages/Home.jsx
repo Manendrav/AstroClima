@@ -91,23 +91,21 @@ export default function Home() {
 
     return (
         <div>
-            <div className="w-full  relative text-white">
+            <div className="w-full relative text-white">
                 <img
                     className="w-full h-full object-cover absolute top-0 left-0 z-0"
                     src="bg-black.png"
                     alt="night"
                 />
-                <div className="relative z-10  max-w-6xl mx-auto p-3">
-                    <div className='p-2'>
-                        <div className='top flex justify-between my-3 p-2'>
-                            <div className='logo text-xl font-semibold text-blue-400 my-auto'>
-                                ASTROCLIMA
-                            </div>
+                <div className="relative flex flex-col max-w-screen-xl mx-auto p-3">
+                    <div className="p-2 flex flex-col w-full">
+                        <div className="top flex justify-between items-center my-3 p-2">
+                            <img src="../Logo.png" alt="Logo" className="h-[30px]" />
 
-                            <div className='flex gap-10'>
-                                <div className="bg-slate-800 p-2 ml-10 rounded-full w-[30rem] flex" >
-                                    <div className='mt-1 mr-1 text-slate-600'>
-                                        <CiSearch size="1.5em" className='ml-2' />
+                            <div className="flex gap-4 md:gap-10">
+                                <div className="bg-slate-800 p-2 md:ml-10 rounded-full w-full md:w-[30rem] flex">
+                                    <div className="mt-1 mr-1 text-slate-600">
+                                        <CiSearch size="1.5em" className="ml-2" />
                                     </div>
                                     <input
                                         ref={inputRef}
@@ -118,35 +116,47 @@ export default function Home() {
                                     />
                                 </div>
 
-                                <div className='absolute top-2 right-14 md:static inline-block mt-1 mr-3 md:right-[12rem] '>
-                                    <div className={`relative flex justify-around items-center w-20 h-10 bg-gray-700 rounded-lg cursor-pointer`} onClick={handleButtonClick}>
+                                <div className="md:relative inline-block mt-1 mr-3">
+                                    <div
+                                        className={`relative flex justify-around items-center w-20 h-10 bg-gray-700 rounded-lg cursor-pointer`}
+                                        onClick={handleButtonClick}
+                                    >
                                         {/* Thumb */}
-                                        <div className={`absolute p-1 top-0 left-0 w-10 h-10 bg-blue-500 rounded-lg shadow-md flex items-center justify-center transform transition-transform ${isActive ? 'translate-x-full' : 'translate-x-0'}`}> <img src="../air/typ.svg" alt="temp" className='h-[5vh] ' /> </div>
-                                        <h1 className='text-white font-semibold text-2xl'>°C</h1>
-                                        <h1 className='text-white font-semibold text-2xl'>°F</h1>
+                                        <div
+                                            className={`absolute p-1 top-0 left-0 w-10 h-10 bg-blue-500 rounded-lg shadow-md flex items-center justify-center transform transition-transform ${isActive ? 'translate-x-full' : 'translate-x-0'
+                                                }`}
+                                        >
+                                            {' '}
+                                            <img src="../air/typ.svg" alt="temp" className="h-[5vh] " />{' '}
+                                        </div>
+                                        <h1 className="text-white font-semibold text-2xl">°C</h1>
+                                        <h1 className="text-white font-semibold text-2xl">°F</h1>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
 
-                        <div className='body flex justify-around' >
-                            <div className='todaywether w-[45vw]'>
-                                <div className='weather'>
+                        <div className="body flex flex-col md:flex-row justify-evenly">
+                            <div className="todaywether md:w-[45rem] mb-4 md:mb-0">
+                                <div className="weather">
                                     <Weather data={weatherData} error={errorMessage} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit={celsiusToFahrenheit} />
+
                                 </div>
 
-                                <div className='info'>
+                                <div className="info">
                                     <TodayForcast data={weatherData} error={errorMessage} forecast={forecastData} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit={celsiusToFahrenheit} />
+
                                 </div>
                             </div>
 
-                            <div className='weekwether'>
-                                <div className='sun'>
+                            <div className="weekwether">
+                                <div className="sun">
                                     <SunMove data={weatherData} error={errorMessage} />
+
                                 </div>
                                 <div>
                                     <Weeks forecast={forecastData} icon={weatherIcon} fernhite={isActive} celsiusToFahrenheit={celsiusToFahrenheit} />
+
                                 </div>
                             </div>
                         </div>
@@ -157,3 +167,10 @@ export default function Home() {
         </div>
     )
 }
+
+/*
+
+    
+
+
+*/

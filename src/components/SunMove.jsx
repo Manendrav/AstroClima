@@ -42,8 +42,8 @@ export default function SunMove({ data, error }) {
 
 
     return (
-        <div className='p-3'>
-            <div className='bg-slate-900 rounded-lg p-3 w-[25vw]'>
+        <div className='p-3 flex flex-col gap-5'>
+            <div className='bg-slate-900 rounded-lg p-3'>
                 <div className='icon flex justify-between px-3'>
                     <div className=''>
                         <img src="./air/sunrise.svg" alt="sunrise" className='h-[4vh]' />
@@ -55,16 +55,15 @@ export default function SunMove({ data, error }) {
 
                 <div className='movement h-[13vh] overflow-hidden p-3'>
                     <div className='border-t-2 rounded-full h-[50vh] relative mt-5 border-slate-500 shadow-2xl shadow-slate-100'>
-                        {
-                            currentTime > sunsetTime ?
-                                <div className={`absolute w-14 h-14 rounded-full top-[-5px]  left-28 transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
-                                    <img src="./air/Moon.svg" alt="" srcset="" />
-                                </div>
-                                :
-                                <div className={`absolute w-14 h-14 rounded-full ${position > 50 ? 'top-8 right-16' : position > 25 ? "top-0 left-28" : 'top-6 left-5'} transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
-                                    <img src="./air/Sun.svg" alt="" srcset="" />
-                                </div>
-                        }
+                        {currentTime > sunsetTime ? (
+                            <div className={`absolute w-14 h-14 rounded-full top-[-5px] left-28 transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
+                                <img src="./air/Moon.svg" alt="moon" />
+                            </div>
+                        ) : (
+                            <div className={`absolute w-14 h-14 rounded-full ${position > 50 ? 'top-8 right-16' : position > 25 ? "top-0 left-28" : 'top-6 left-5'} transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
+                                <img src="./air/Sun.svg" alt="sun" />
+                            </div>
+                        )}
                     </div>
                 </div>
 
@@ -81,7 +80,7 @@ export default function SunMove({ data, error }) {
             </div>
 
             <div className='map mt-5'>
-                <div className="map bg-slate-900 h-[40vh] overflow-hidden rounded-md flex justify-center items-center text-gray-500">
+                <div className="map bg-slate-900 h-[40vh] md:w-[25vw] overflow-hidden rounded-md flex justify-center items-center text-gray-500">
                     {data ? (
                         <Map latitude={data.coord.lat} longitude={data.coord.lon} />
                     ) : (
@@ -90,6 +89,7 @@ export default function SunMove({ data, error }) {
                 </div>
             </div>
         </div>
+
     )
 }
 
