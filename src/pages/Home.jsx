@@ -63,17 +63,14 @@ export default function Home() {
     const [location, setLocation] = useState(null);
 
     useEffect(() => {
-        // Check if the Geolocation API is supported by the browser
         if (navigator.geolocation) {
             // Ask for location permission
             navigator.geolocation.getCurrentPosition(
                 (position) => {
-                    // Handle successful location retrieval
                     const { latitude, longitude } = position.coords;
                     setLocation({ latitude, longitude });
                 },
                 (error) => {
-                    // Handle error or user denied permission
                     console.error('Error getting location:', error.message);
                 }
             );
@@ -87,8 +84,8 @@ export default function Home() {
             const { latitude, longitude } = location;
             fetchWeatherData(null, latitude, longitude);
         }
-        
-    },[location]);
+
+    }, [location]);
 
 
 
