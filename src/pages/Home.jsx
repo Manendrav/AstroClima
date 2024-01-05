@@ -100,10 +100,10 @@ export default function Home() {
                 <div className="relative flex flex-col max-w-screen-xl mx-auto p-3">
                     <div className="p-2 flex flex-col w-full">
                         <div className="top flex justify-between items-center my-3 p-2">
-                            <img src="../Logo.png" alt="Logo" className="h-[30px]" />
+                            <img src="../Logo.png" alt="Logo" className="h-[30px] min-[320px]:h-[20px]" />
 
                             <div className="flex gap-4 md:gap-10">
-                                <div className="bg-slate-800 p-2 md:ml-10 rounded-full w-full md:w-[30rem] flex">
+                                <div className="bg-slate-800 p-2 md:ml-10 rounded-full w-full md:w-[30rem] flex min-[320px]:hidden min-[600px]:flex">
                                     <div className="mt-1 mr-1 text-slate-600">
                                         <CiSearch size="1.5em" className="ml-2" />
                                     </div>
@@ -111,29 +111,35 @@ export default function Home() {
                                         ref={inputRef}
                                         type="text"
                                         placeholder="Search..."
-                                        className="w-full px-4 rounded-md focus:outline-none bg-slate-800"
+                                        className="w-full px-4 rounded-md focus:outline-none bg-slate-800 "
                                         onKeyDown={handleKeyDown}
                                     />
                                 </div>
 
-                                <div className="md:relative inline-block mt-1 mr-3">
-                                    <div
-                                        className={`relative flex justify-around items-center w-20 h-10 bg-gray-700 rounded-lg cursor-pointer`}
-                                        onClick={handleButtonClick}
-                                    >
+                                <div className="md:relative inline-block mt-1 mr-3 ">
+                                    <div className={`relative flex justify-around items-center w-20 h-10 bg-gray-700 rounded-lg cursor-pointer `} onClick={handleButtonClick}>
                                         {/* Thumb */}
-                                        <div
-                                            className={`absolute p-1 top-0 left-0 w-10 h-10 bg-blue-500 rounded-lg shadow-md flex items-center justify-center transform transition-transform ${isActive ? 'translate-x-full' : 'translate-x-0'
-                                                }`}
-                                        >
-                                            {' '}
-                                            <img src="../air/typ.svg" alt="temp" className="h-[5vh] " />{' '}
+                                        <div className={`absolute p-1 top-0 left-0 w-10 h-10 bg-blue-500 rounded-lg shadow-md flex items-center justify-center transform transition-transform ${isActive ? 'translate-x-full' : 'translate-x-0'}`}>
+                                            <img src="../air/typ.svg" alt="temp" className="h-[5vh] " />
                                         </div>
                                         <h1 className="text-white font-semibold text-2xl">°C</h1>
                                         <h1 className="text-white font-semibold text-2xl">°F</h1>
                                     </div>
                                 </div>
                             </div>
+                        </div>
+
+                        <div className="bg-slate-800 p-2 md:ml-10 rounded-full w-full md:w-[30rem] flex min-[320px]:flex min-[600px]:hidden">
+                            <div className="mt-1 mr-1 text-slate-600">
+                                <CiSearch size="1.5em" className="ml-2" />
+                            </div>
+                            <input
+                                ref={inputRef}
+                                type="text"
+                                placeholder="Search..."
+                                className="w-full px-4 rounded-md focus:outline-none bg-slate-800 "
+                                onKeyDown={handleKeyDown}
+                            />
                         </div>
 
                         <div className="body flex flex-col md:flex-row justify-evenly">
