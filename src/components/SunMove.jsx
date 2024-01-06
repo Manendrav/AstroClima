@@ -58,7 +58,7 @@ export default function SunMove({ data, error }) {
 
                 <div className='movement h-[13vh] overflow-hidden p-3'>
                     <div className='border-t-2 rounded-full h-[50vh] relative mt-5 border-slate-500 shadow-2xl shadow-slate-100'>
-                        {parseInt(currentTime) > parseInt(sunsetTime) ? (
+                        {parseInt(currentTime) > parseInt(sunriseTime) ? (
                             <div className={`absolute w-14 h-14 rounded-full top-[-5px] min-[600px]:left-24 min-[320px]:left-20 transform translate-x-1/2 -translate-y-1/2 transition-all duration-1000`}>
                                 <img src="./air/Moon.svg" alt="moon" />
                             </div>

@@ -1,4 +1,5 @@
 import create from 'zustand';
+import conf from './conf';
 
 export const useWeatherStore = create((set) => ({
     weatherData: null,
@@ -6,16 +7,17 @@ export const useWeatherStore = create((set) => ({
     forecastData: null,
 
     fetchWeatherData: (city, latitude, longitude) => {
-    
+        const apiKey = conf.weatherKey;
+        
         let apiUrl;
         let todayForecast;
 
         if (city) {
-            apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`;
-            todayForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&excluded=hour&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`
+            apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+            todayForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&excluded=hour&appid=${apiKey}&units=metric`
         }else if (latitude && longitude) {
-            apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`;
-            todayForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&excluded=hour&appid=b3a3c18dabcf17587ca1bda001ddf22e&units=metric`
+            apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+            todayForecast = `https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&excluded=hour&appid=${apiKey}&units=metric`
         }else {
             throw new Error("Invalid parameters for fetching weather data.");
         }

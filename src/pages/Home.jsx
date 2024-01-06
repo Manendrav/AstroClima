@@ -5,6 +5,7 @@ import Weeks from '../components/Weeks';
 import TodayForcast from '../components/TodayForcast';
 import { useWeatherStore } from '../store/store';
 import SunMove from '../components/SunMove';
+import { FaGithub } from "react-icons/fa";
 
 
 export default function Home() {
@@ -18,11 +19,11 @@ export default function Home() {
     const inputRefMobile = useRef()
 
     const handleInputChange = () => {
-        let newCity ;
-        if(inputRef.current.value){
+        let newCity;
+        if (inputRef.current.value) {
             newCity = inputRef.current.value;
             inputRef.current.value = '';
-        }else{
+        } else {
             newCity = inputRefMobile.current.value;
             inputRefMobile.current.value = '';
         }
@@ -47,7 +48,7 @@ export default function Home() {
         return parseInt(fahrenheit);
     }
 
-    
+
     // This code is used to fetch user location 
     useEffect(() => {
         if (navigator.geolocation) {
@@ -65,7 +66,7 @@ export default function Home() {
             console.error('Geolocation is not supported by this browser.');
         }
     }, []);
-    
+
 
     // This code is used fetch data according the user location
     useEffect(() => {
@@ -108,9 +109,21 @@ export default function Home() {
                     src="bg-black.png"
                     alt="night"
                 />
+
+                <div className="relative banner-section bg-blue-950  text-white">
+                    <div className='max-w-screen-xl flex items-center justify-between mx-auto p-2'>
+                        <div className="text-left">
+                            <p className="min-[600px]:text-base min-[320px]:text-sm">Get the latest weather updates with AstroClima!</p>
+                        </div>
+                        <div className="text-right">
+                            <a href="https://github.com/Itz-Manu/AstroClima"><button className='border-2 flex rounded-md gap-2 text-base p-1 px-2 hover:border-blue-500 hover:shadow-2xl hover:shadow-blue-400 min-[320px]:text-sm'>Github <FaGithub size="1.5em"/></button></a>
+                        </div>
+                    </div>
+
+                </div>
                 <div className="relative flex flex-col max-w-screen-xl mx-auto p-3">
                     <div className="p-2 flex flex-col w-full">
-                        <div className="top flex justify-between items-center my-3 p-2">
+                        <div className="top flex justify-between items-center my-2 p-2">
                             <img src="../Logo.png" alt="Logo" className="h-[30px] min-[320px]:h-[20px]" />
 
                             <div className="flex gap-4 md:gap-10">
