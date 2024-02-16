@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 
 export default function TodayForcast({ forecast, error, icon, data, fernhite, celsiusToFahrenheit }) {
 
@@ -36,11 +36,12 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
         return `${num} ${quality}`;
       };
 
+
     return (
         <div className='p-3'>
             <div className="forcast flex flex-col bg-slate-900 rounded-lg p-3 mb-3">
                 <h1 className=' text-gray-600 font-medium pl-3'>Today Forcast</h1>
-                <div className='flex items-center text-center gap-5 p-3 text-white overflow-scroll overflow-y-hidden no-scrollbar'>
+                <div className='flex items-center text-center gap-5 p-3 text-white overflow-scroll overflow-y-hidden no-scrollbar '>
                     {
                         list ?
                             list.map((day, key) => (
@@ -67,14 +68,14 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
 
             <div className='conditions flex flex-col rounded-lg p-3'>
                 <h1 className='mb-5 text-gray-500 font-semibold pl-3'>Air Conditions</h1>
-                <div className=''>
+                <div className='min-[320px]:text-sm'>
                     <div className='flex min-[320px]:justify-between min-[600px]:justify-evenly mb-5'>
-                        <div className='text-center bg-slate-900 p-5 h-[9rem] min-[600px]:w-[15rem]  min-[320px]:w-[37vw] rounded-lg'>
+                        <div className='text-center bg-slate-900 p-5 h-[9rem] min-[600px]:w-[15rem] min-[320px]:w-[37vw] rounded-lg'>
                             <div className='flex justify-center items-center gap-2 p-2'>
                                 <img src="./air/wind.svg" alt="Wind Speed" className='h-[5vh]' />
-                                <h3 className=' text-gray-400 font-medium text-xl'>Wind</h3>
+                                <h3 className=' text-gray-400 font-medium text-xl '>Wind</h3>
                             </div>
-                            <h2 className="text-2xl font-semibold">{data ? data.wind.speed : "-.-"} m/s</h2>
+                            <h2 className="text-2xl font-semibold min-[320px]:text-xl ">{data ? data.wind.speed : "-.-"} m/s</h2>
                         </div>
 
                         <div className='text-center bg-slate-900 p-5 h-[9rem] min-[600px]:w-[15rem] min-[320px]:w-[37vw] rounded-lg'>
@@ -82,7 +83,7 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
                                 <img src="./air/visibility.svg" alt="Visibility" className='h-[5vh]' />
                                 <h3 className=' text-gray-400 font-medium text-xl'>Visibility</h3>
                             </div>
-                            <h2 className="text-2xl font-semibold">{data ? parseInt(data.visibility / 1000) : "-.-"} Km/h</h2>
+                            <h2 className="text-2xl font-semibold min-[320px]:text-xl">{data ? parseInt(data.visibility / 1000) : "-.-"} Km/h</h2>
                         </div>
                     </div>
 
@@ -92,7 +93,7 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
                                 <img src="./air/air.svg" alt="Humidity" className='h-[5vh]' />
                                 <h3 className=' text-gray-400 font-medium text-xl'>Humidity</h3>
                             </div>
-                            <h2 className="text-2xl font-semibold">{data ? data.main.humidity : "-.-"} %</h2>
+                            <h2 className="text-2xl font-semibold min-[320px]:text-xl">{data ? data.main.humidity : "-.-"} %</h2>
                         </div>
 
                         <div className='text-center bg-slate-900 p-5 h-[9rem] min-[600px]:w-[15rem] min-[320px]:w-[37vw] rounded-lg'>
@@ -100,7 +101,7 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
                                 <img src="./air/pressure.svg" alt="Pressure" className='h-[5vh]' />
                                 <h3 className=' text-gray-400 font-medium text-xl '>Pressure</h3>
                             </div>
-                            <h2 className="text-2xl font-semibold">{data ? data.main.pressure : "-.-"} hPa</h2>
+                            <h2 className="text-2xl font-semibold min-[320px]:text-xl">{data ? data.main.pressure : "-.-"} hPa</h2>
                         </div>
                     </div>
 
@@ -110,7 +111,7 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
                                 <img src="./air/UV.svg" alt="Humidity" className='h-[5vh]' />
                                 <h3 className=' text-gray-400 font-medium text-xl'>UV</h3>
                             </div>
-                            <h2 className="text-2xl font-semibold">{data ? RandomUV() : "-.-"}</h2>
+                            <h2 className="text-2xl font-semibold min-[320px]:text-xl">{data ? RandomUV() : "-.-"}</h2>
                         </div>
 
                         <div className='text-center bg-slate-900 p-5 h-[9rem] min-[600px]:w-[15rem] min-[320px]:w-[37vw] rounded-lg'>
@@ -118,7 +119,7 @@ export default function TodayForcast({ forecast, error, icon, data, fernhite, ce
                                 <img src="./air/AQI.svg" alt="Pressure" className='h-[5vh]' />
                                 <h3 className=' text-gray-400 font-medium text-xl '>AQI</h3>
                             </div>
-                            <h2 className="text-2xl font-semibold">{data ? RandomAQI() : "-.-"}</h2>
+                            <h2 className="text-2xl font-semibold min-[320px]:text-xl">{data ? RandomAQI() : "-.-"}</h2>
                         </div>
                     </div>
                 </div>
